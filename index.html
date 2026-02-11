@@ -1,14 +1,4 @@
-Sí: en el último index que te pasé **no estaba** la línea del footer con el link (error mío) y lo del WhatsApp suele pasar por 2 motivos típicos:
 
-1. **El botón flotante está, pero el ícono queda del mismo color que el fondo** (porque el SVG usa `fill="currentColor"` y el botón no tiene `color` definido). Resultado: “está” pero no se ve.
-2. Tenés `XXXXXXXXXXX` sin reemplazar y pensás que “no aparece”, pero en realidad eso solo afecta el link, no la visibilidad. La visibilidad es CSS.
-
-Te dejo el **index corregido**, con:
-
-* Footer: **“Creado y diseñado por Ciborg 347”** linkeado a `https://ciborg347.onrender.com`
-* Botón WhatsApp flotante: le seteo `color: #25D366;` para que el ícono contraste SIEMPRE (y mantiene estética negra/rosada).
-
-```html
 <!DOCTYPE html>
 <html lang="es-AR" data-theme="dark">
 <head>
@@ -622,4 +612,3 @@ Te dejo el **index corregido**, con:
   </script>
 </body>
 </html>
-```
