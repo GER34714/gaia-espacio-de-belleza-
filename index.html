@@ -1,3 +1,14 @@
+Sí: en el último index que te pasé **no estaba** la línea del footer con el link (error mío) y lo del WhatsApp suele pasar por 2 motivos típicos:
+
+1. **El botón flotante está, pero el ícono queda del mismo color que el fondo** (porque el SVG usa `fill="currentColor"` y el botón no tiene `color` definido). Resultado: “está” pero no se ve.
+2. Tenés `XXXXXXXXXXX` sin reemplazar y pensás que “no aparece”, pero en realidad eso solo afecta el link, no la visibilidad. La visibilidad es CSS.
+
+Te dejo el **index corregido**, con:
+
+* Footer: **“Creado y diseñado por Ciborg 347”** linkeado a `https://ciborg347.onrender.com`
+* Botón WhatsApp flotante: le seteo `color: #25D366;` para que el ícono contraste SIEMPRE (y mantiene estética negra/rosada).
+
+```html
 <!DOCTYPE html>
 <html lang="es-AR" data-theme="dark">
 <head>
@@ -300,33 +311,6 @@
     }
     .hint{ margin:0; color: var(--muted); font-size: 13px; }
 
-    .steps{
-      display:grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap:18px;
-    }
-    .step{
-      background: var(--card);
-      border: 1px solid var(--stroke);
-      border-radius: var(--r);
-      box-shadow: var(--shadow);
-      padding: 16px;
-    }
-    .stepN{
-      width: 34px;
-      height: 34px;
-      border-radius: 999px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight: 1100;
-      border: 1px solid rgba(255,79,163,.66);
-      background: rgba(255,79,163,.12);
-      margin-bottom: 10px;
-    }
-    .stepT{ margin:0 0 6px; font-weight: 1100; }
-    .stepP{ margin:0; color: var(--muted); font-size: 13px; line-height: 1.55; }
-
     .grid{
       display:grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -389,38 +373,8 @@
       font-size: 13px;
       line-height: 1.55;
     }
-    .bullets{ display:grid; gap:8px; margin-top: 2px; }
-    .bLine{ display:flex; gap:8px; align-items:baseline; font-size: 13px; color: var(--muted); }
-    .bKey{
-      font-weight: 1100;
-      min-width: 110px;
-      color: rgba(255,255,255,.92);
-    }
-    html[data-theme="light"] .bKey{ color: rgba(20,20,26,.92); }
-
     .footBtn{ padding: 0 16px 16px; }
     .footBtn .cta{ width:100%; border-radius: 16px; }
-
-    .shots{
-      display:grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-    }
-    .shot{
-      background: var(--card);
-      border: 1px solid var(--stroke);
-      border-radius: var(--r);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      aspect-ratio: 1 / 1;
-    }
-    .shot img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-      transform: scale(1.02);
-    }
 
     footer{ padding: 26px 0 18px; }
     .footerBox{
@@ -436,22 +390,25 @@
       flex-wrap:wrap;
     }
     .footerBox small{ color: var(--muted); }
+    .credit a{ text-decoration: underline; text-underline-offset: 3px; }
 
+    /* WhatsApp flotante (visible SI o SI) */
     .waFloat{
       position: fixed;
       right: 18px;
       bottom: calc(18px + env(safe-area-inset-bottom));
-      z-index: 60;
+      z-index: 9999;
       width: 58px;
       height: 58px;
       border-radius: 999px;
       background: var(--btn);
-      border: 1px solid rgba(255,79,163,.70);
+      border: 2px solid rgba(255,79,163,.70);
       box-shadow: 0 22px 48px rgba(255,79,163,.14), 0 18px 40px rgba(0,0,0,.18);
       display:flex;
       align-items:center;
       justify-content:center;
       transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+      color: #25D366;
     }
     .waFloat:hover{
       transform: translateY(-2px);
@@ -463,14 +420,12 @@
     @media (max-width: 980px){
       .heroGrid{ grid-template-columns: 1fr; }
       .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .steps{ grid-template-columns: 1fr; }
     }
     @media (max-width: 640px){
       .wrap{ width:min(var(--max), calc(100% - 24px)); }
       .heroCard{ padding: 18px; }
       .heroLogo{ height: 66px; }
       .grid{ grid-template-columns: 1fr; gap: 16px; }
-      .shots{ gap: 10px; }
       .waFloat{ right: 14px; bottom: calc(14px + env(safe-area-inset-bottom)); width: 56px; height: 56px; }
       .brandTag{ display:none; }
     }
@@ -494,25 +449,8 @@
           </span>
         </button>
 
-        <a class="btnPill" id="igTop" href="https://instagram.com/USERNAME" target="_blank" rel="noopener" aria-label="Ver trabajos en Instagram">
-          <span class="ico" aria-hidden="true">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
-              <path d="M8 5.78A2.22 2.22 0 1 0 8 10.22 2.22 2.22 0 0 0 8 5.78Zm0 3.65A1.43 1.43 0 1 1 8 6.57a1.43 1.43 0 0 1 0 2.86Z"/>
-              <path d="M12.4 0H3.6A3.6 3.6 0 0 0 0 3.6v8.8A3.6 3.6 0 0 0 3.6 16h8.8A3.6 3.6 0 0 0 16 12.4V3.6A3.6 3.6 0 0 0 12.4 0ZM14.7 12.4a2.3 2.3 0 0 1-2.3 2.3H3.6a2.3 2.3 0 0 1-2.3-2.3V3.6A2.3 2.3 0 0 1 3.6 1.3h8.8a2.3 2.3 0 0 1 2.3 2.3v8.8Z"/>
-              <path d="M12.2 2.9a.9.9 0 1 0 .9.9.9.9 0 0 0-.9-.9Z"/>
-            </svg>
-          </span>
-          Instagram
-        </a>
-
-        <a class="btnPill" id="waTop" href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener" aria-label="Sacar turno por WhatsApp">
-          <span class="ico" aria-hidden="true">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
-              <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326z"/>
-            </svg>
-          </span>
-          Turnos
-        </a>
+        <a class="btnPill" id="igTop" href="https://instagram.com/USERNAME" target="_blank" rel="noopener" aria-label="Ver trabajos en Instagram">Instagram</a>
+        <a class="btnPill" id="waTop" href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener" aria-label="Sacar turno por WhatsApp">Turnos</a>
       </div>
     </div>
   </header>
@@ -546,21 +484,6 @@
       </div>
     </div>
 
-    <section>
-      <div class="wrap">
-        <div class="sectionHead">
-          <h2 class="h2 shadowTxt">Cómo reservo</h2>
-          <p class="hint shadowTxt">3 pasos.</p>
-        </div>
-
-        <div class="steps">
-          <div class="step"><div class="stepN">1</div><p class="stepT shadowTxt">Elegís el servicio</p><p class="stepP shadowTxt">Entrás al servicio que querés y tocás el botón.</p></div>
-          <div class="step"><div class="stepN">2</div><p class="stepT shadowTxt">Se abre WhatsApp</p><p class="stepP shadowTxt">Queda el mensaje listo con el nombre del servicio.</p></div>
-          <div class="step"><div class="stepN">3</div><p class="stepT shadowTxt">Coordinamos</p><p class="stepP shadowTxt">Te paso disponibilidad y reservamos tu turno.</p></div>
-        </div>
-      </div>
-    </section>
-
     <section id="servicios">
       <div class="wrap">
         <div class="sectionHead">
@@ -574,11 +497,6 @@
             <div class="body">
               <div class="topRow"><h3 class="title shadowTxt">Dipping</h3><span class="chip">Uñas</span></div>
               <p class="desc shadowTxt">[Placeholder: beneficio corto]</p>
-              <div class="bullets">
-                <div class="bLine shadowTxt"><span class="bKey">Duración:</span><span>[Placeholder]</span></div>
-                <div class="bLine shadowTxt"><span class="bKey">Precio desde:</span><span>[Placeholder]</span></div>
-                <div class="bLine shadowTxt"><span class="bKey">Incluye:</span><span>[Placeholder]</span></div>
-              </div>
             </div>
             <div class="footBtn"><a class="cta primary waService" data-service="Dipping" href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener">Quiero este servicio</a></div>
           </article>
@@ -588,11 +506,6 @@
             <div class="body">
               <div class="topRow"><h3 class="title shadowTxt">Kapping</h3><span class="chip">Uñas</span></div>
               <p class="desc shadowTxt">[Placeholder: beneficio corto]</p>
-              <div class="bullets">
-                <div class="bLine shadowTxt"><span class="bKey">Duración:</span><span>[Placeholder]</span></div>
-                <div class="bLine shadowTxt"><span class="bKey">Precio desde:</span><span>[Placeholder]</span></div>
-                <div class="bLine shadowTxt"><span class="bKey">Incluye:</span><span>[Placeholder]</span></div>
-              </div>
             </div>
             <div class="footBtn"><a class="cta primary waService" data-service="Kapping" href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener">Quiero este servicio</a></div>
           </article>
@@ -602,11 +515,6 @@
             <div class="body">
               <div class="topRow"><h3 class="title shadowTxt">Laminado de cejas + Lifting</h3><span class="chip">Cejas</span></div>
               <p class="desc shadowTxt">[Placeholder: beneficio corto]</p>
-              <div class="bullets">
-                <div class="bLine shadowTxt"><span class="bKey">Duración:</span><span>[Placeholder]</span></div>
-                <div class="bLine shadowTxt"><span class="bKey">Precio desde:</span><span>[Placeholder]</span></div>
-                <div class="bLine shadowTxt"><span class="bKey">Incluye:</span><span>[Placeholder]</span></div>
-              </div>
             </div>
             <div class="footBtn"><a class="cta primary waService" data-service="Laminado de cejas + Lifting" href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener">Quiero este servicio</a></div>
           </article>
@@ -616,11 +524,6 @@
             <div class="body">
               <div class="topRow"><h3 class="title shadowTxt">Masajes</h3><span class="chip">Bienestar</span></div>
               <p class="desc shadowTxt">[Placeholder: beneficio corto]</p>
-              <div class="bullets">
-                <div class="bLine shadowTxt"><span class="bKey">Duración:</span><span>[Placeholder]</span></div>
-                <div class="bLine shadowTxt"><span class="bKey">Precio desde:</span><span>[Placeholder]</span></div>
-                <div class="bLine shadowTxt"><span class="bKey">Incluye:</span><span>[Placeholder]</span></div>
-              </div>
             </div>
             <div class="footBtn"><a class="cta primary waService" data-service="Masajes" href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener">Quiero este servicio</a></div>
           </article>
@@ -630,11 +533,6 @@
             <div class="body">
               <div class="topRow"><h3 class="title shadowTxt">Pestañas pelo x pelo</h3><span class="chip">Pestañas</span></div>
               <p class="desc shadowTxt">[Placeholder: beneficio corto]</p>
-              <div class="bullets">
-                <div class="bLine shadowTxt"><span class="bKey">Duración:</span><span>[Placeholder]</span></div>
-                <div class="bLine shadowTxt"><span class="bKey">Precio desde:</span><span>[Placeholder]</span></div>
-                <div class="bLine shadowTxt"><span class="bKey">Incluye:</span><span>[Placeholder]</span></div>
-              </div>
             </div>
             <div class="footBtn"><a class="cta primary waService" data-service="Pestañas pelo x pelo" href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener">Quiero este servicio</a></div>
           </article>
@@ -644,11 +542,6 @@
             <div class="body">
               <div class="topRow"><h3 class="title shadowTxt">Esculpidas</h3><span class="chip">Uñas</span></div>
               <p class="desc shadowTxt">[Placeholder: beneficio corto]</p>
-              <div class="bullets">
-                <div class="bLine shadowTxt"><span class="bKey">Duración:</span><span>[Placeholder]</span></div>
-                <div class="bLine shadowTxt"><span class="bKey">Precio desde:</span><span>[Placeholder]</span></div>
-                <div class="bLine shadowTxt"><span class="bKey">Incluye:</span><span>[Placeholder]</span></div>
-              </div>
             </div>
             <div class="footBtn"><a class="cta primary waService" data-service="Esculpidas" href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener">Quiero este servicio</a></div>
           </article>
@@ -658,33 +551,9 @@
             <div class="body">
               <div class="topRow"><h3 class="title shadowTxt">Semipermanente + Softgel</h3><span class="chip">Uñas</span></div>
               <p class="desc shadowTxt">[Placeholder: beneficio corto]</p>
-              <div class="bullets">
-                <div class="bLine shadowTxt"><span class="bKey">Duración:</span><span>[Placeholder]</span></div>
-                <div class="bLine shadowTxt"><span class="bKey">Precio desde:</span><span>[Placeholder]</span></div>
-                <div class="bLine shadowTxt"><span class="bKey">Incluye:</span><span>[Placeholder]</span></div>
-              </div>
             </div>
             <div class="footBtn"><a class="cta primary waService" data-service="Semipermanente + Softgel" href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener">Quiero este servicio</a></div>
           </article>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="wrap">
-        <div class="sectionHead">
-          <h2 class="h2 shadowTxt">Resultados</h2>
-          <p class="hint shadowTxt">Mirá más en Instagram.</p>
-        </div>
-
-        <div class="shots">
-          <div class="shot"><img src="https://iili.io/q9nJ811.png" alt="Trabajo" loading="lazy" /></div>
-          <div class="shot"><img src="https://iili.io/q9nJvqP.png" alt="Trabajo" loading="lazy" /></div>
-          <div class="shot"><img src="https://iili.io/q9nJSrF.png" alt="Trabajo" loading="lazy" /></div>
-        </div>
-
-        <div style="margin-top:14px;">
-          <a class="cta" id="igResults" href="https://instagram.com/USERNAME" target="_blank" rel="noopener">Ver más en Instagram</a>
         </div>
       </div>
     </section>
@@ -693,7 +562,7 @@
       <div class="wrap">
         <div class="footerBox">
           <small>GAIA | Espacio de belleza</small>
-          <small>Fuente: Briquete.otf</small>
+          <small class="credit">Creado y diseñado por <a href="https://ciborg347.onrender.com" target="_blank" rel="noopener">Ciborg 347</a></small>
         </div>
       </div>
     </footer>
@@ -702,7 +571,7 @@
   <a class="waFloat" id="waFloat" href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener" aria-label="Turnos por WhatsApp">
     <span class="ico" aria-hidden="true">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
-        <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326z"/>
+        <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.5c.003-3.6 2.93-6.52 6.533-6.52a6.5 6.5 0 0 1 4.63 1.91 6.48 6.48 0 0 1 1.92 4.62c-.003 3.6-2.93 6.52-6.53 6.52zm3.76-4.13c-.205-.103-1.215-.6-1.404-.668-.19-.068-.327-.103-.465.103-.137.205-.535.668-.656.805-.12.137-.24.154-.445.051-.205-.103-.866-.319-1.65-1.016-.61-.544-1.022-1.215-1.142-1.42-.12-.205-.013-.316.09-.419.093-.092.205-.24.308-.36.103-.12.137-.205.205-.342.068-.137.034-.257-.017-.36-.051-.103-.465-1.12-.637-1.534-.167-.402-.337-.347-.465-.347h-.397c-.137 0-.36.051-.548.257-.188.205-.72.703-.72 1.713 0 1.01.737 1.985.84 2.122.103.137 1.45 2.214 3.513 3.105.491.212.874.339 1.172.434.492.156.94.134 1.295.082.395-.059 1.215-.496 1.387-.976.171-.48.171-.891.12-.976-.051-.086-.188-.137-.394-.24z"/>
       </svg>
     </span>
   </a>
@@ -739,10 +608,8 @@
         return WA_BASE + "?text=" + encodeURIComponent(msg);
       }
 
-      ["waTop","waHero","waFloat"].forEach(function(id){
-        var el = document.getElementById(id);
-        if(el) el.href = waLink("un servicio");
-      });
+      var float = document.getElementById("waFloat");
+      if(float) float.href = waLink("un servicio");
 
       var serviceBtns = document.querySelectorAll(".waService");
       serviceBtns.forEach(function(a){
@@ -755,3 +622,4 @@
   </script>
 </body>
 </html>
+```
