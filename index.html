@@ -17,6 +17,14 @@
   <link rel="icon" href="https://iili.io/q9oeuHJ.md.png" />
 
   <style>
+    @font-face{
+      font-family: "Briquete";
+      src: url("./Briquete.otf") format("opentype");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
     :root{
       --max: 1120px;
       --r: 22px;
@@ -43,6 +51,13 @@
       --headerStroke: rgba(255,255,255,.12);
 
       --focus: rgba(255,79,163,.55);
+
+      --toggleBg: #ff4fa3;
+      --toggleTxt: #0b0b0f;
+      --toggleStroke: rgba(255,79,163,.88);
+      --toggleRing: rgba(255,79,163,.18);
+
+      --brandFont: "Briquete", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
     }
 
     html[data-theme="light"]{
@@ -63,6 +78,11 @@
       --headerStroke: rgba(20,20,26,.10);
 
       --focus: rgba(255,79,163,.55);
+
+      --toggleBg: #0b0b0f;
+      --toggleTxt: #ffffff;
+      --toggleStroke: rgba(20,20,26,.18);
+      --toggleRing: rgba(0,0,0,.10);
     }
 
     *{ box-sizing:border-box; }
@@ -76,7 +96,6 @@
       padding-bottom: 112px;
     }
 
-    /* overlay por tema (sin capa negra) */
     body::before{
       content:"";
       position:fixed;
@@ -109,17 +128,27 @@
       gap:12px;
       padding: 12px 0;
     }
+
     .brand{
       display:flex;
-      align-items:center;
-      gap:12px;
-      min-width: 120px;
+      align-items:baseline;
+      gap:10px;
+      min-width: 140px;
     }
-    .brandLogo{
-      height: 46px;
-      width:auto;
-      display:block;
-      filter: drop-shadow(0 14px 28px rgba(0,0,0,.18));
+    .brandText{
+      font-family: var(--brandFont);
+      font-weight: 400;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: 20px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .brandTag{
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 900;
+      white-space: nowrap;
     }
 
     .actions{
@@ -140,21 +169,33 @@
       border: 1px solid var(--btnStroke);
       box-shadow: 0 12px 26px rgba(0,0,0,.14);
       transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
-      font-weight: 1000;
+      font-weight: 1100;
       letter-spacing:.01em;
       font-size: 13px;
       white-space:nowrap;
       cursor:pointer;
     }
-    .btnPill:hover, .btnIcon:hover{
+    .btnPill:hover{
       transform: translateY(-1px);
       border-color: var(--focus);
       box-shadow: 0 18px 36px rgba(0,0,0,.16), 0 0 0 6px rgba(255,79,163,.06);
     }
+
     .btnIcon{
       width: 44px;
       height: 44px;
       padding: 0;
+    }
+
+    #themeToggle{
+      background: var(--toggleBg);
+      color: var(--toggleTxt);
+      border-color: var(--toggleStroke);
+      box-shadow: 0 14px 32px rgba(0,0,0,.14), 0 0 0 6px var(--toggleRing);
+    }
+    #themeToggle:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(0,0,0,.16), 0 0 0 10px var(--toggleRing);
     }
 
     .ico{ width:18px; height:18px; display:inline-block; }
@@ -286,7 +327,6 @@
     .stepT{ margin:0 0 6px; font-weight: 1100; }
     .stepP{ margin:0; color: var(--muted); font-size: 13px; line-height: 1.55; }
 
-    /* cards con aire para ver overlay */
     .grid{
       display:grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -361,7 +401,6 @@
     .footBtn{ padding: 0 16px 16px; }
     .footBtn .cta{ width:100%; border-radius: 16px; }
 
-    /* Resultados: mini grid prolijo (no enorme) */
     .shots{
       display:grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -381,32 +420,6 @@
       object-fit:cover;
       display:block;
       transform: scale(1.02);
-    }
-
-    .faq{
-      display:grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-    }
-    details{
-      background: var(--card);
-      border: 1px solid var(--stroke);
-      border-radius: var(--r);
-      box-shadow: var(--shadow);
-      padding: 14px 16px;
-    }
-    summary{
-      cursor:pointer;
-      font-weight: 1100;
-      letter-spacing:.01em;
-      list-style:none;
-    }
-    summary::-webkit-details-marker{ display:none; }
-    details p{
-      margin:10px 0 0;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.6;
     }
 
     footer{ padding: 26px 0 18px; }
@@ -447,28 +460,19 @@
     }
     .waFloat .ico{ width: 26px; height: 26px; }
 
-    a:focus, button:focus, summary:focus{
-      outline:none;
-      box-shadow: 0 0 0 3px rgba(255,79,163,.22);
-      border-radius: 14px;
-    }
-
     @media (max-width: 980px){
       .heroGrid{ grid-template-columns: 1fr; }
       .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .steps{ grid-template-columns: 1fr; }
-      .faq{ grid-template-columns: 1fr; }
-      .shots{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
     @media (max-width: 640px){
       .wrap{ width:min(var(--max), calc(100% - 24px)); }
-      .brandLogo{ height: 40px; }
       .heroCard{ padding: 18px; }
       .heroLogo{ height: 66px; }
       .grid{ grid-template-columns: 1fr; gap: 16px; }
-      .steps{ gap: 14px; }
-      .shots{ grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+      .shots{ gap: 10px; }
       .waFloat{ right: 14px; bottom: calc(14px + env(safe-area-inset-bottom)); width: 56px; height: 56px; }
+      .brandTag{ display:none; }
     }
   </style>
 </head>
@@ -477,14 +481,15 @@
   <header>
     <div class="wrap hdr">
       <div class="brand">
-        <img class="brandLogo" src="https://iili.io/q9oeuHJ.md.png" alt="GAIA" />
+        <span class="brandText shadowTxt">GAIA</span>
+        <span class="brandTag shadowTxt">Espacio de belleza</span>
       </div>
 
       <div class="actions" aria-label="Accesos">
         <button class="btnIcon" id="themeToggle" type="button" aria-label="Cambiar tema">
           <span class="ico" aria-hidden="true">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
-              <path d="M8 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm0-11a.75.75 0 0 1 .75.75V3a.75.75 0 0 1-1.5 0V1.75A.75.75 0 0 1 8 1Zm0 12a.75.75 0 0 1 .75.75V15a.75.75 0 0 1-1.5 0v-1.25A.75.75 0 0 1 8 13Zm7-5a.75.75 0 0 1-.75.75H13a.75.75 0 0 1 0-1.5h1.25A.75.75 0 0 1 15 8ZM3 8a.75.75 0 0 1-.75.75H1A.75.75 0 0 1 1 7.25h1.25A.75.75 0 0 1 3 8Zm9.03-4.28a.75.75 0 0 1 1.06 0l.88.88a.75.75 0 1 1-1.06 1.06l-.88-.88a.75.75 0 0 1 0-1.06ZM2.03 13.28a.75.75 0 0 1 1.06 0l.88.88a.75.75 0 0 1-1.06 1.06l-.88-.88a.75.75 0 0 1 0-1.06Zm11.94 1.94a.75.75 0 0 1-1.06 0l-.88-.88a.75.75 0 0 1 1.06-1.06l.88.88a.75.75 0 0 1 0 1.06ZM3.97 5.66a.75.75 0 0 1-1.06 0l-.88-.88A.75.75 0 1 1 3.09 3.72l.88.88a.75.75 0 0 1 0 1.06Z"/>
+              <path d="M8 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm0-11a.75.75 0 0 1 .75.75V3a.75.75 0 0 1-1.5 0V1.75A.75.75 0 0 1 8 1Zm0 12a.75.75 0 0 1 .75.75V15a.75.75 0 0 1-1.5 0v-1.25A.75.75 0 0 1 8 13Z"/>
             </svg>
           </span>
         </button>
@@ -503,7 +508,7 @@
         <a class="btnPill" id="waTop" href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener" aria-label="Sacar turno por WhatsApp">
           <span class="ico" aria-hidden="true">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
-              <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.5c.003-3.6 2.93-6.52 6.533-6.52a6.5 6.5 0 0 1 4.63 1.91 6.48 6.48 0 0 1 1.92 4.62c-.003 3.6-2.93 6.52-6.53 6.52zm3.76-4.13c-.205-.103-1.215-.6-1.404-.668-.19-.068-.327-.103-.465.103-.137.205-.535.668-.656.805-.12.137-.24.154-.445.051-.205-.103-.866-.319-1.65-1.016-.61-.544-1.022-1.215-1.142-1.42-.12-.205-.013-.316.09-.419.093-.092.205-.24.308-.36.103-.12.137-.205.205-.342.068-.137.034-.257-.017-.36-.051-.103-.465-1.12-.637-1.534-.167-.402-.337-.347-.465-.347h-.397c-.137 0-.36.051-.548.257-.188.205-.72.703-.72 1.713 0 1.01.737 1.985.84 2.122.103.137 1.45 2.214 3.513 3.105.491.212.874.339 1.172.434.492.156.94.134 1.295.082.395-.059 1.215-.496 1.387-.976.171-.48.171-.891.12-.976-.051-.086-.188-.137-.394-.24z"/>
+              <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326z"/>
             </svg>
           </span>
           Turnos
@@ -519,30 +524,11 @@
           <div>
             <img class="heroLogo" src="https://iili.io/q9oeuHJ.md.png" alt="GAIA" />
             <h1 class="h1 shadowTxt">Reservá tu turno y salí con todo</h1>
-            <p class="sub shadowTxt">
-              Uñas, pestañas, cejas y masajes con terminación prolija. Elegí servicio y coordinamos por WhatsApp.
-            </p>
+            <p class="sub shadowTxt">Uñas, pestañas, cejas y masajes con terminación prolija. Elegí servicio y coordinamos por WhatsApp.</p>
 
             <div class="ctaRow">
-              <a class="cta primary" id="waHero" href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener">
-                <span class="ico" aria-hidden="true">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
-                    <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.5c.003-3.6 2.93-6.52 6.533-6.52a6.5 6.5 0 0 1 4.63 1.91 6.48 6.48 0 0 1 1.92 4.62c-.003 3.6-2.93 6.52-6.53 6.52zm3.76-4.13c-.205-.103-1.215-.6-1.404-.668-.19-.068-.327-.103-.465.103-.137.205-.535.668-.656.805-.12.137-.24.154-.445.051-.205-.103-.866-.319-1.65-1.016-.61-.544-1.022-1.215-1.142-1.42-.12-.205-.013-.316.09-.419.093-.092.205-.24.308-.36.103-.12.137-.205.205-.342.068-.137.034-.257-.017-.36-.051-.103-.465-1.12-.637-1.534-.167-.402-.337-.347-.465-.347h-.397c-.137 0-.36.051-.548.257-.188.205-.72.703-.72 1.713 0 1.01.737 1.985.84 2.122.103.137 1.45 2.214 3.513 3.105.491.212.874.339 1.172.434.492.156.94.134 1.295.082.395-.059 1.215-.496 1.387-.976.171-.48.171-.891.12-.976-.051-.086-.188-.137-.394-.24z"/>
-                  </svg>
-                </span>
-                Reservar turno
-              </a>
-
-              <a class="cta" id="igHero" href="https://instagram.com/USERNAME" target="_blank" rel="noopener">
-                <span class="ico" aria-hidden="true">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
-                    <path d="M8 5.78A2.22 2.22 0 1 0 8 10.22 2.22 2.22 0 0 0 8 5.78Zm0 3.65A1.43 1.43 0 1 1 8 6.57a1.43 1.43 0 0 1 0 2.86Z"/>
-                    <path d="M12.4 0H3.6A3.6 3.6 0 0 0 0 3.6v8.8A3.6 3.6 0 0 0 3.6 16h8.8A3.6 3.6 0 0 0 16 12.4V3.6A3.6 3.6 0 0 0 12.4 0ZM14.7 12.4a2.3 2.3 0 0 1-2.3 2.3H3.6a2.3 2.3 0 0 1-2.3-2.3V3.6A2.3 2.3 0 0 1 3.6 1.3h8.8a2.3 2.3 0 0 1 2.3 2.3v8.8Z"/>
-                    <path d="M12.2 2.9a.9.9 0 1 0 .9.9.9.9 0 0 0-.9-.9Z"/>
-                  </svg>
-                </span>
-                Ver trabajos
-              </a>
+              <a class="cta primary" id="waHero" href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener">Reservar turno</a>
+              <a class="cta" id="igHero" href="https://instagram.com/USERNAME" target="_blank" rel="noopener">Ver trabajos</a>
             </div>
           </div>
 
@@ -568,21 +554,9 @@
         </div>
 
         <div class="steps">
-          <div class="step">
-            <div class="stepN">1</div>
-            <p class="stepT shadowTxt">Elegís el servicio</p>
-            <p class="stepP shadowTxt">Entrás al servicio que querés y tocás el botón.</p>
-          </div>
-          <div class="step">
-            <div class="stepN">2</div>
-            <p class="stepT shadowTxt">Se abre WhatsApp</p>
-            <p class="stepP shadowTxt">Queda el mensaje listo con el nombre del servicio.</p>
-          </div>
-          <div class="step">
-            <div class="stepN">3</div>
-            <p class="stepT shadowTxt">Coordinamos</p>
-            <p class="stepP shadowTxt">Te paso disponibilidad y reservamos tu turno.</p>
-          </div>
+          <div class="step"><div class="stepN">1</div><p class="stepT shadowTxt">Elegís el servicio</p><p class="stepP shadowTxt">Entrás al servicio que querés y tocás el botón.</p></div>
+          <div class="step"><div class="stepN">2</div><p class="stepT shadowTxt">Se abre WhatsApp</p><p class="stepP shadowTxt">Queda el mensaje listo con el nombre del servicio.</p></div>
+          <div class="step"><div class="stepN">3</div><p class="stepT shadowTxt">Coordinamos</p><p class="stepP shadowTxt">Te paso disponibilidad y reservamos tu turno.</p></div>
         </div>
       </div>
     </section>
@@ -606,9 +580,7 @@
                 <div class="bLine shadowTxt"><span class="bKey">Incluye:</span><span>[Placeholder]</span></div>
               </div>
             </div>
-            <div class="footBtn">
-              <a class="cta primary waService" data-service="Dipping" href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener">Quiero este servicio</a>
-            </div>
+            <div class="footBtn"><a class="cta primary waService" data-service="Dipping" href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener">Quiero este servicio</a></div>
           </article>
 
           <article class="card">
@@ -622,13 +594,11 @@
                 <div class="bLine shadowTxt"><span class="bKey">Incluye:</span><span>[Placeholder]</span></div>
               </div>
             </div>
-            <div class="footBtn">
-              <a class="cta primary waService" data-service="Kapping" href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener">Quiero este servicio</a>
-            </div>
+            <div class="footBtn"><a class="cta primary waService" data-service="Kapping" href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener">Quiero este servicio</a></div>
           </article>
 
           <article class="card">
-            <div class="media"><img src="https://iili.io/q9nJNzQ.png" alt="Laminado de cejas y lifting" loading="lazy" /></div>
+            <div class="media"><img src="https://iili.io/q9nJNzQ.png" alt="Laminado de cejas + Lifting" loading="lazy" /></div>
             <div class="body">
               <div class="topRow"><h3 class="title shadowTxt">Laminado de cejas + Lifting</h3><span class="chip">Cejas</span></div>
               <p class="desc shadowTxt">[Placeholder: beneficio corto]</p>
@@ -638,9 +608,7 @@
                 <div class="bLine shadowTxt"><span class="bKey">Incluye:</span><span>[Placeholder]</span></div>
               </div>
             </div>
-            <div class="footBtn">
-              <a class="cta primary waService" data-service="Laminado de cejas + Lifting" href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener">Quiero este servicio</a>
-            </div>
+            <div class="footBtn"><a class="cta primary waService" data-service="Laminado de cejas + Lifting" href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener">Quiero este servicio</a></div>
           </article>
 
           <article class="card">
@@ -654,13 +622,11 @@
                 <div class="bLine shadowTxt"><span class="bKey">Incluye:</span><span>[Placeholder]</span></div>
               </div>
             </div>
-            <div class="footBtn">
-              <a class="cta primary waService" data-service="Masajes" href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener">Quiero este servicio</a>
-            </div>
+            <div class="footBtn"><a class="cta primary waService" data-service="Masajes" href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener">Quiero este servicio</a></div>
           </article>
 
           <article class="card">
-            <div class="media"><img src="https://iili.io/q9nJSrF.png" alt="Pestañas pelo por pelo" loading="lazy" /></div>
+            <div class="media"><img src="https://iili.io/q9nJSrF.png" alt="Pestañas pelo x pelo" loading="lazy" /></div>
             <div class="body">
               <div class="topRow"><h3 class="title shadowTxt">Pestañas pelo x pelo</h3><span class="chip">Pestañas</span></div>
               <p class="desc shadowTxt">[Placeholder: beneficio corto]</p>
@@ -670,9 +636,7 @@
                 <div class="bLine shadowTxt"><span class="bKey">Incluye:</span><span>[Placeholder]</span></div>
               </div>
             </div>
-            <div class="footBtn">
-              <a class="cta primary waService" data-service="Pestañas pelo x pelo" href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener">Quiero este servicio</a>
-            </div>
+            <div class="footBtn"><a class="cta primary waService" data-service="Pestañas pelo x pelo" href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener">Quiero este servicio</a></div>
           </article>
 
           <article class="card">
@@ -686,13 +650,11 @@
                 <div class="bLine shadowTxt"><span class="bKey">Incluye:</span><span>[Placeholder]</span></div>
               </div>
             </div>
-            <div class="footBtn">
-              <a class="cta primary waService" data-service="Esculpidas" href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener">Quiero este servicio</a>
-            </div>
+            <div class="footBtn"><a class="cta primary waService" data-service="Esculpidas" href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener">Quiero este servicio</a></div>
           </article>
 
           <article class="card">
-            <div class="media"><img src="https://iili.io/q9nJ4kJ.png" alt="Semipermanente y softgel" loading="lazy" /></div>
+            <div class="media"><img src="https://iili.io/q9nJ4kJ.png" alt="Semipermanente + Softgel" loading="lazy" /></div>
             <div class="body">
               <div class="topRow"><h3 class="title shadowTxt">Semipermanente + Softgel</h3><span class="chip">Uñas</span></div>
               <p class="desc shadowTxt">[Placeholder: beneficio corto]</p>
@@ -702,9 +664,7 @@
                 <div class="bLine shadowTxt"><span class="bKey">Incluye:</span><span>[Placeholder]</span></div>
               </div>
             </div>
-            <div class="footBtn">
-              <a class="cta primary waService" data-service="Semipermanente + Softgel" href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener">Quiero este servicio</a>
-            </div>
+            <div class="footBtn"><a class="cta primary waService" data-service="Semipermanente + Softgel" href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener">Quiero este servicio</a></div>
           </article>
         </div>
       </div>
@@ -729,60 +689,11 @@
       </div>
     </section>
 
-    <section>
-      <div class="wrap">
-        <div class="sectionHead">
-          <h2 class="h2 shadowTxt">Preguntas frecuentes</h2>
-          <p class="hint shadowTxt">Para decidir rápido.</p>
-        </div>
-
-        <div class="faq">
-          <details>
-            <summary>¿Cómo reservo turno?</summary>
-            <p>Elegí el servicio y tocá “Quiero este servicio”. Se abre WhatsApp con un mensaje listo para enviar.</p>
-          </details>
-          <details>
-            <summary>¿Puedo mandar una referencia?</summary>
-            <p>Sí. Mandame una foto por WhatsApp y lo ajustamos a lo que querés.</p>
-          </details>
-          <details>
-            <summary>¿Qué tengo que tener en cuenta antes de venir?</summary>
-            <p>[Placeholder: indicaciones simples]</p>
-          </details>
-          <details>
-            <summary>¿Cuánto dura?</summary>
-            <p>[Placeholder: rangos aproximados o por servicio]</p>
-          </details>
-        </div>
-      </div>
-    </section>
-
     <footer>
       <div class="wrap">
         <div class="footerBox">
-          <div class="actions">
-            <a class="btnPill" id="waFooter" href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener">
-              <span class="ico" aria-hidden="true">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
-                  <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.5c.003-3.6 2.93-6.52 6.533-6.52a6.5 6.5 0 0 1 4.63 1.91 6.48 6.48 0 0 1 1.92 4.62c-.003 3.6-2.93 6.52-6.53 6.52zm3.76-4.13c-.205-.103-1.215-.6-1.404-.668-.19-.068-.327-.103-.465.103-.137.205-.535.668-.656.805-.12.137-.24.154-.445.051-.205-.103-.866-.319-1.65-1.016-.61-.544-1.022-1.215-1.142-1.42-.12-.205-.013-.316.09-.419.093-.092.205-.24.308-.36.103-.12.137-.205.205-.342.068-.137.034-.257-.017-.36-.051-.103-.465-1.12-.637-1.534-.167-.402-.337-.347-.465-.347h-.397c-.137 0-.36.051-.548.257-.188.205-.72.703-.72 1.713 0 1.01.737 1.985.84 2.122.103.137 1.45 2.214 3.513 3.105.491.212.874.339 1.172.434.492.156.94.134 1.295.082.395-.059 1.215-.496 1.387-.976.171-.48.171-.891.12-.976-.051-.086-.188-.137-.394-.24z"/>
-                </svg>
-              </span>
-              WhatsApp
-            </a>
-
-            <a class="btnPill" id="igFooter" href="https://instagram.com/USERNAME" target="_blank" rel="noopener">
-              <span class="ico" aria-hidden="true">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
-                  <path d="M8 5.78A2.22 2.22 0 1 0 8 10.22 2.22 2.22 0 0 0 8 5.78Zm0 3.65A1.43 1.43 0 1 1 8 6.57a1.43 1.43 0 0 1 0 2.86Z"/>
-                  <path d="M12.4 0H3.6A3.6 3.6 0 0 0 0 3.6v8.8A3.6 3.6 0 0 0 3.6 16h8.8A3.6 3.6 0 0 0 16 12.4V3.6A3.6 3.6 0 0 0 12.4 0ZM14.7 12.4a2.3 2.3 0 0 1-2.3 2.3H3.6a2.3 2.3 0 0 1-2.3-2.3V3.6A2.3 2.3 0 0 1 3.6 1.3h8.8a2.3 2.3 0 0 1 2.3 2.3v8.8Z"/>
-                  <path d="M12.2 2.9a.9.9 0 1 0 .9.9.9.9 0 0 0-.9-.9Z"/>
-                </svg>
-              </span>
-              Instagram
-            </a>
-          </div>
-
           <small>GAIA | Espacio de belleza</small>
+          <small>Fuente: Briquete.otf</small>
         </div>
       </div>
     </footer>
@@ -791,7 +702,7 @@
   <a class="waFloat" id="waFloat" href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener" aria-label="Turnos por WhatsApp">
     <span class="ico" aria-hidden="true">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
-        <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.5c.003-3.6 2.93-6.52 6.533-6.52a6.5 6.5 0 0 1 4.63 1.91 6.48 6.48 0 0 1 1.92 4.62c-.003 3.6-2.93 6.52-6.53 6.52zm3.76-4.13c-.205-.103-1.215-.6-1.404-.668-.19-.068-.327-.103-.465.103-.137.205-.535.668-.656.805-.12.137-.24.154-.445.051-.205-.103-.866-.319-1.65-1.016-.61-.544-1.022-1.215-1.142-1.42-.12-.205-.013-.316.09-.419.093-.092.205-.24.308-.36.103-.12.137-.205.205-.342.068-.137.034-.257-.017-.36-.051-.103-.465-1.12-.637-1.534-.167-.402-.337-.347-.465-.347h-.397c-.137 0-.36.051-.548.257-.188.205-.72.703-.72 1.713 0 1.01.737 1.985.84 2.122.103.137 1.45 2.214 3.513 3.105.491.212.874.339 1.172.434.492.156.94.134 1.295.082.395-.059 1.215-.496 1.387-.976.171-.48.171-.891.12-.976-.051-.086-.188-.137-.394-.24z"/>
+        <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326z"/>
       </svg>
     </span>
   </a>
@@ -828,7 +739,7 @@
         return WA_BASE + "?text=" + encodeURIComponent(msg);
       }
 
-      ["waTop","waHero","waFloat","waFooter"].forEach(function(id){
+      ["waTop","waHero","waFloat"].forEach(function(id){
         var el = document.getElementById(id);
         if(el) el.href = waLink("un servicio");
       });
