@@ -7,7 +7,6 @@
   <title>GAIA | Espacio de belleza</title>
   <meta name="description" content="Turnos por WhatsApp y trabajos en Instagram. Dipping, kapping, laminado + lifting, masajes, pestañas pelo x pelo, esculpidas, semipermanente + softgel." />
 
-  <!-- Open Graph -->
   <meta property="og:title" content="GAIA | Espacio de belleza" />
   <meta property="og:description" content="Reservá tu turno por WhatsApp y mirá resultados en Instagram." />
   <meta property="og:type" content="website" />
@@ -28,23 +27,22 @@
       --txt: #f4f4f6;
       --muted: rgba(244,244,246,.82);
 
-      --card: rgba(10,10,14,.82);
+      --card: rgba(10,10,14,.84);
       --stroke: rgba(255,255,255,.14);
-      --shadow: 0 18px 48px rgba(0,0,0,.28);
+      --shadow: 0 18px 48px rgba(0,0,0,.26);
 
       --pink: #ff4fa3;
-      --pink2:#ff8cc9;
 
       --chipBg: rgba(255,79,163,.12);
       --chipStroke: rgba(255,79,163,.46);
 
-      --btn: rgba(10,10,14,.74);
+      --btn: rgba(10,10,14,.76);
       --btnStroke: rgba(255,255,255,.16);
 
       --header: rgba(10,10,14,.78);
       --headerStroke: rgba(255,255,255,.12);
 
-      --glow: rgba(255,79,163,.28);
+      --focus: rgba(255,79,163,.55);
     }
 
     html[data-theme="light"]{
@@ -54,17 +52,17 @@
       --txt: #14141a;
       --muted: rgba(20,20,26,.74);
 
-      --card: rgba(255,255,255,.88);
+      --card: rgba(255,255,255,.90);
       --stroke: rgba(20,20,26,.12);
       --shadow: 0 18px 48px rgba(0,0,0,.12);
 
-      --btn: rgba(255,255,255,.84);
+      --btn: rgba(255,255,255,.86);
       --btnStroke: rgba(20,20,26,.14);
 
       --header: rgba(255,255,255,.82);
       --headerStroke: rgba(20,20,26,.10);
 
-      --glow: rgba(255,79,163,.18);
+      --focus: rgba(255,79,163,.55);
     }
 
     *{ box-sizing:border-box; }
@@ -78,7 +76,7 @@
       padding-bottom: 112px;
     }
 
-    /* overlay por tema (SIN capa negra/tint) */
+    /* overlay por tema (sin capa negra) */
     body::before{
       content:"";
       position:fixed;
@@ -96,7 +94,6 @@
     .shadowTxt{ text-shadow: 0 2px 16px rgba(0,0,0,.22); }
     html[data-theme="light"] .shadowTxt{ text-shadow: 0 2px 16px rgba(0,0,0,.10); }
 
-    /* header */
     header{
       position:fixed;
       inset:0 0 auto 0;
@@ -116,13 +113,13 @@
       display:flex;
       align-items:center;
       gap:12px;
-      min-width: 140px;
+      min-width: 120px;
     }
     .brandLogo{
       height: 46px;
       width:auto;
       display:block;
-      filter: drop-shadow(0 14px 28px rgba(0,0,0,.22));
+      filter: drop-shadow(0 14px 28px rgba(0,0,0,.18));
     }
 
     .actions{
@@ -130,7 +127,6 @@
       align-items:center;
       gap:10px;
       flex-wrap:nowrap;
-      min-width: 0;
     }
 
     .btnPill, .btnIcon{
@@ -144,22 +140,21 @@
       border: 1px solid var(--btnStroke);
       box-shadow: 0 12px 26px rgba(0,0,0,.14);
       transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
-      font-weight: 900;
+      font-weight: 1000;
       letter-spacing:.01em;
       font-size: 13px;
       white-space:nowrap;
+      cursor:pointer;
     }
     .btnPill:hover, .btnIcon:hover{
       transform: translateY(-1px);
-      border-color: rgba(255,79,163,.60);
+      border-color: var(--focus);
       box-shadow: 0 18px 36px rgba(0,0,0,.16), 0 0 0 6px rgba(255,79,163,.06);
     }
-
     .btnIcon{
       width: 44px;
       height: 44px;
       padding: 0;
-      border-radius: 999px;
     }
 
     .ico{ width:18px; height:18px; display:inline-block; }
@@ -167,7 +162,6 @@
 
     main{ padding-top: 92px; }
 
-    /* hero */
     .hero{ padding: 26px 0 10px; }
     .heroCard{
       background: var(--card);
@@ -180,19 +174,19 @@
       display:grid;
       grid-template-columns: 1.15fr .85fr;
       gap: 18px;
-      align-items:center;
+      align-items:start;
     }
     .heroLogo{
-      height: 76px;
+      height: 78px;
       width:auto;
       display:block;
-      margin-bottom: 14px;
-      filter: drop-shadow(0 18px 34px rgba(0,0,0,.22));
+      margin-bottom: 12px;
+      filter: drop-shadow(0 18px 34px rgba(0,0,0,.18));
     }
     .h1{
       margin:0 0 10px;
       font-size: clamp(22px, 2.6vw, 32px);
-      font-weight: 1000;
+      font-weight: 1100;
       letter-spacing:.01em;
     }
     .sub{
@@ -219,45 +213,35 @@
       background: var(--btn);
       color: var(--txt);
       box-shadow: 0 16px 34px rgba(0,0,0,.14);
-      font-weight: 1000;
+      font-weight: 1100;
       font-size: 14px;
       min-height: 48px;
       transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
     }
     .cta:hover{
       transform: translateY(-1px);
-      border-color: rgba(255,79,163,.60);
+      border-color: var(--focus);
       box-shadow: 0 22px 44px rgba(0,0,0,.16), 0 0 0 8px rgba(255,79,163,.06);
     }
     .cta.primary{
-      border-color: rgba(255,79,163,.62);
+      border-color: rgba(255,79,163,.66);
       box-shadow: 0 20px 44px rgba(255,79,163,.14), 0 16px 34px rgba(0,0,0,.14);
     }
 
-    .proof{
+    .side{
       display:grid;
       gap:12px;
     }
-    .proofBox{
+    .sideBox{
       background: var(--card);
       border: 1px solid var(--stroke);
       border-radius: var(--r);
       box-shadow: var(--shadow);
       padding: 16px;
     }
-    .proofT{
-      margin:0 0 6px;
-      font-weight: 1000;
-      letter-spacing:.01em;
-    }
-    .proofP{
-      margin:0;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.55;
-    }
+    .sideT{ margin:0 0 6px; font-weight: 1100; }
+    .sideP{ margin:0; color: var(--muted); font-size: 13px; line-height: 1.55; }
 
-    /* sections */
     section{ padding: 26px 0; }
     .sectionHead{
       display:flex;
@@ -271,15 +255,10 @@
       font-size: 18px;
       letter-spacing:.08em;
       text-transform:uppercase;
-      font-weight: 1000;
+      font-weight: 1100;
     }
-    .hint{
-      margin:0;
-      color: var(--muted);
-      font-size: 13px;
-    }
+    .hint{ margin:0; color: var(--muted); font-size: 13px; }
 
-    /* steps */
     .steps{
       display:grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -299,15 +278,15 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      font-weight: 1000;
-      border: 1px solid rgba(255,79,163,.62);
+      font-weight: 1100;
+      border: 1px solid rgba(255,79,163,.66);
       background: rgba(255,79,163,.12);
       margin-bottom: 10px;
     }
-    .stepT{ margin:0 0 6px; font-weight: 1000; }
+    .stepT{ margin:0 0 6px; font-weight: 1100; }
     .stepP{ margin:0; color: var(--muted); font-size: 13px; line-height: 1.55; }
 
-    /* services grid */
+    /* cards con aire para ver overlay */
     .grid{
       display:grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -351,7 +330,7 @@
     }
     .title{
       margin:0;
-      font-weight: 1000;
+      font-weight: 1100;
       font-size: 16px;
       letter-spacing:.01em;
     }
@@ -361,7 +340,7 @@
       border-radius: 999px;
       border: 1px solid var(--chipStroke);
       background: var(--chipBg);
-      font-weight: 1000;
+      font-weight: 1100;
       white-space:nowrap;
     }
     .desc{
@@ -373,41 +352,37 @@
     .bullets{ display:grid; gap:8px; margin-top: 2px; }
     .bLine{ display:flex; gap:8px; align-items:baseline; font-size: 13px; color: var(--muted); }
     .bKey{
-      font-weight: 1000;
+      font-weight: 1100;
       min-width: 110px;
       color: rgba(255,255,255,.92);
     }
     html[data-theme="light"] .bKey{ color: rgba(20,20,26,.92); }
 
-    .footBtn{
-      padding: 0 16px 16px;
-    }
-    .footBtn .cta{
-      width:100%;
-      border-radius: 16px;
-    }
+    .footBtn{ padding: 0 16px 16px; }
+    .footBtn .cta{ width:100%; border-radius: 16px; }
 
-    /* gallery */
-    .gallery{
+    /* Resultados: mini grid prolijo (no enorme) */
+    .shots{
       display:grid;
-      grid-template-columns: repeat(12, 1fr);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 12px;
     }
-    .gItem{
+    .shot{
       background: var(--card);
       border: 1px solid var(--stroke);
       border-radius: var(--r);
-      overflow:hidden;
       box-shadow: var(--shadow);
-      min-height: 180px;
+      overflow:hidden;
+      aspect-ratio: 1 / 1;
     }
-    .gItem img{ width:100%; height:100%; object-fit:cover; display:block; }
-    .g1{ grid-column: span 7; }
-    .g2{ grid-column: span 5; }
-    .g3{ grid-column: span 5; }
-    .g4{ grid-column: span 7; }
+    .shot img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      transform: scale(1.02);
+    }
 
-    /* faq */
     .faq{
       display:grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -422,7 +397,7 @@
     }
     summary{
       cursor:pointer;
-      font-weight: 1000;
+      font-weight: 1100;
       letter-spacing:.01em;
       list-style:none;
     }
@@ -434,7 +409,6 @@
       line-height: 1.6;
     }
 
-    /* footer */
     footer{ padding: 26px 0 18px; }
     .footerBox{
       background: var(--card);
@@ -450,7 +424,6 @@
     }
     .footerBox small{ color: var(--muted); }
 
-    /* floating whatsapp */
     .waFloat{
       position: fixed;
       right: 18px;
@@ -460,8 +433,8 @@
       height: 58px;
       border-radius: 999px;
       background: var(--btn);
-      border: 1px solid rgba(255,79,163,.68);
-      box-shadow: 0 22px 48px rgba(255,79,163,.14), 0 18px 40px rgba(0,0,0,.20);
+      border: 1px solid rgba(255,79,163,.70);
+      box-shadow: 0 22px 48px rgba(255,79,163,.14), 0 18px 40px rgba(0,0,0,.18);
       display:flex;
       align-items:center;
       justify-content:center;
@@ -469,24 +442,23 @@
     }
     .waFloat:hover{
       transform: translateY(-2px);
-      border-color: rgba(255,79,163,.82);
-      box-shadow: 0 26px 60px rgba(255,79,163,.16), 0 20px 46px rgba(0,0,0,.22);
+      border-color: var(--focus);
+      box-shadow: 0 26px 60px rgba(255,79,163,.16), 0 20px 46px rgba(0,0,0,.20);
     }
     .waFloat .ico{ width: 26px; height: 26px; }
 
-    /* focus */
     a:focus, button:focus, summary:focus{
-      outline: none;
+      outline:none;
       box-shadow: 0 0 0 3px rgba(255,79,163,.22);
+      border-radius: 14px;
     }
 
-    /* responsive */
     @media (max-width: 980px){
       .heroGrid{ grid-template-columns: 1fr; }
       .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .steps{ grid-template-columns: 1fr; }
       .faq{ grid-template-columns: 1fr; }
-      .g1,.g2,.g3,.g4{ grid-column: span 12; }
+      .shots{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
     @media (max-width: 640px){
       .wrap{ width:min(var(--max), calc(100% - 24px)); }
@@ -494,9 +466,8 @@
       .heroCard{ padding: 18px; }
       .heroLogo{ height: 66px; }
       .grid{ grid-template-columns: 1fr; gap: 16px; }
-      .actions{ gap:8px; }
-      .btnPill{ padding: 10px 12px; }
-      .btnPill .label{ display:none; }
+      .steps{ gap: 14px; }
+      .shots{ grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
       .waFloat{ right: 14px; bottom: calc(14px + env(safe-area-inset-bottom)); width: 56px; height: 56px; }
     }
   </style>
@@ -526,7 +497,7 @@
               <path d="M12.2 2.9a.9.9 0 1 0 .9.9.9.9 0 0 0-.9-.9Z"/>
             </svg>
           </span>
-          <span class="label">Instagram</span>
+          Instagram
         </a>
 
         <a class="btnPill" id="waTop" href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener" aria-label="Sacar turno por WhatsApp">
@@ -535,7 +506,7 @@
               <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.5c.003-3.6 2.93-6.52 6.533-6.52a6.5 6.5 0 0 1 4.63 1.91 6.48 6.48 0 0 1 1.92 4.62c-.003 3.6-2.93 6.52-6.53 6.52zm3.76-4.13c-.205-.103-1.215-.6-1.404-.668-.19-.068-.327-.103-.465.103-.137.205-.535.668-.656.805-.12.137-.24.154-.445.051-.205-.103-.866-.319-1.65-1.016-.61-.544-1.022-1.215-1.142-1.42-.12-.205-.013-.316.09-.419.093-.092.205-.24.308-.36.103-.12.137-.205.205-.342.068-.137.034-.257-.017-.36-.051-.103-.465-1.12-.637-1.534-.167-.402-.337-.347-.465-.347h-.397c-.137 0-.36.051-.548.257-.188.205-.72.703-.72 1.713 0 1.01.737 1.985.84 2.122.103.137 1.45 2.214 3.513 3.105.491.212.874.339 1.172.434.492.156.94.134 1.295.082.395-.059 1.215-.496 1.387-.976.171-.48.171-.891.12-.976-.051-.086-.188-.137-.394-.24z"/>
             </svg>
           </span>
-          <span class="label">Turnos</span>
+          Turnos
         </a>
       </div>
     </div>
@@ -549,11 +520,11 @@
             <img class="heroLogo" src="https://iili.io/q9oeuHJ.md.png" alt="GAIA" />
             <h1 class="h1 shadowTxt">Reservá tu turno y salí con todo</h1>
             <p class="sub shadowTxt">
-              Uñas, pestañas, cejas y masajes con un acabado prolijo y lindo. Elegí un servicio y coordinamos por WhatsApp.
+              Uñas, pestañas, cejas y masajes con terminación prolija. Elegí servicio y coordinamos por WhatsApp.
             </p>
 
             <div class="ctaRow">
-              <a class="cta primary" id="waHero" href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener" aria-label="Reservar turno por WhatsApp">
+              <a class="cta primary" id="waHero" href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener">
                 <span class="ico" aria-hidden="true">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
                     <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.5c.003-3.6 2.93-6.52 6.533-6.52a6.5 6.5 0 0 1 4.63 1.91 6.48 6.48 0 0 1 1.92 4.62c-.003 3.6-2.93 6.52-6.53 6.52zm3.76-4.13c-.205-.103-1.215-.6-1.404-.668-.19-.068-.327-.103-.465.103-.137.205-.535.668-.656.805-.12.137-.24.154-.445.051-.205-.103-.866-.319-1.65-1.016-.61-.544-1.022-1.215-1.142-1.42-.12-.205-.013-.316.09-.419.093-.092.205-.24.308-.36.103-.12.137-.205.205-.342.068-.137.034-.257-.017-.36-.051-.103-.465-1.12-.637-1.534-.167-.402-.337-.347-.465-.347h-.397c-.137 0-.36.051-.548.257-.188.205-.72.703-.72 1.713 0 1.01.737 1.985.84 2.122.103.137 1.45 2.214 3.513 3.105.491.212.874.339 1.172.434.492.156.94.134 1.295.082.395-.059 1.215-.496 1.387-.976.171-.48.171-.891.12-.976-.051-.086-.188-.137-.394-.24z"/>
@@ -562,7 +533,7 @@
                 Reservar turno
               </a>
 
-              <a class="cta" id="igHero" href="https://instagram.com/USERNAME" target="_blank" rel="noopener" aria-label="Ver trabajos en Instagram">
+              <a class="cta" id="igHero" href="https://instagram.com/USERNAME" target="_blank" rel="noopener">
                 <span class="ico" aria-hidden="true">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
                     <path d="M8 5.78A2.22 2.22 0 1 0 8 10.22 2.22 2.22 0 0 0 8 5.78Zm0 3.65A1.43 1.43 0 1 1 8 6.57a1.43 1.43 0 0 1 0 2.86Z"/>
@@ -575,14 +546,14 @@
             </div>
           </div>
 
-          <div class="proof">
-            <div class="proofBox">
-              <p class="proofT shadowTxt">Turnos por WhatsApp</p>
-              <p class="proofP shadowTxt">Tocás, escribís y coordinamos. Si querés, mandame una foto de referencia.</p>
+          <div class="side">
+            <div class="sideBox">
+              <p class="sideT shadowTxt">Turnos por WhatsApp</p>
+              <p class="sideP shadowTxt">Elegís el servicio y te queda el mensaje listo. Coordinamos rápido.</p>
             </div>
-            <div class="proofBox">
-              <p class="proofT shadowTxt">Resultados en Instagram</p>
-              <p class="proofP shadowTxt">Mirá terminaciones y estilos. Elegís lo que te gusta y lo hacemos.</p>
+            <div class="sideBox">
+              <p class="sideT shadowTxt">Resultados reales</p>
+              <p class="sideP shadowTxt">Mirá terminaciones en Instagram y elegí el estilo que te gusta.</p>
             </div>
           </div>
         </div>
@@ -593,24 +564,24 @@
       <div class="wrap">
         <div class="sectionHead">
           <h2 class="h2 shadowTxt">Cómo reservo</h2>
-          <p class="hint shadowTxt">Simple y rápido.</p>
+          <p class="hint shadowTxt">3 pasos.</p>
         </div>
 
         <div class="steps">
           <div class="step">
             <div class="stepN">1</div>
             <p class="stepT shadowTxt">Elegís el servicio</p>
-            <p class="stepP shadowTxt">Entrás al servicio y tocás “Quiero este servicio”.</p>
+            <p class="stepP shadowTxt">Entrás al servicio que querés y tocás el botón.</p>
           </div>
           <div class="step">
             <div class="stepN">2</div>
             <p class="stepT shadowTxt">Se abre WhatsApp</p>
-            <p class="stepP shadowTxt">Te queda el mensaje listo para enviar con el nombre del servicio.</p>
+            <p class="stepP shadowTxt">Queda el mensaje listo con el nombre del servicio.</p>
           </div>
           <div class="step">
             <div class="stepN">3</div>
             <p class="stepT shadowTxt">Coordinamos</p>
-            <p class="stepP shadowTxt">Te paso disponibilidad y reservamos el turno.</p>
+            <p class="stepP shadowTxt">Te paso disponibilidad y reservamos tu turno.</p>
           </div>
         </div>
       </div>
@@ -620,7 +591,7 @@
       <div class="wrap">
         <div class="sectionHead">
           <h2 class="h2 shadowTxt">Servicios</h2>
-          <p class="hint shadowTxt">Completa: duracion / precio / incluye.</p>
+          <p class="hint shadowTxt">Completá: duracion / precio / incluye.</p>
         </div>
 
         <div class="grid">
@@ -742,19 +713,18 @@
     <section>
       <div class="wrap">
         <div class="sectionHead">
-          <h2 class="h2 shadowTxt">Trabajos</h2>
-          <p class="hint shadowTxt">Ver más en Instagram.</p>
+          <h2 class="h2 shadowTxt">Resultados</h2>
+          <p class="hint shadowTxt">Mirá más en Instagram.</p>
         </div>
 
-        <div class="gallery">
-          <div class="gItem g1"><img src="https://iili.io/q9nJ811.png" alt="Trabajo" loading="lazy" /></div>
-          <div class="gItem g2"><img src="https://iili.io/q9nJvqP.png" alt="Trabajo" loading="lazy" /></div>
-          <div class="gItem g3"><img src="https://iili.io/q9nJNzQ.png" alt="Trabajo" loading="lazy" /></div>
-          <div class="gItem g4"><img src="https://iili.io/q9nJSrF.png" alt="Trabajo" loading="lazy" /></div>
+        <div class="shots">
+          <div class="shot"><img src="https://iili.io/q9nJ811.png" alt="Trabajo" loading="lazy" /></div>
+          <div class="shot"><img src="https://iili.io/q9nJvqP.png" alt="Trabajo" loading="lazy" /></div>
+          <div class="shot"><img src="https://iili.io/q9nJSrF.png" alt="Trabajo" loading="lazy" /></div>
         </div>
 
         <div style="margin-top:14px;">
-          <a class="cta" id="igGallery" href="https://instagram.com/USERNAME" target="_blank" rel="noopener">Ver más en Instagram</a>
+          <a class="cta" id="igResults" href="https://instagram.com/USERNAME" target="_blank" rel="noopener">Ver más en Instagram</a>
         </div>
       </div>
     </section>
@@ -791,16 +761,16 @@
       <div class="wrap">
         <div class="footerBox">
           <div class="actions">
-            <a class="btnPill" id="waFooter" href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener" aria-label="WhatsApp turnos">
+            <a class="btnPill" id="waFooter" href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener">
               <span class="ico" aria-hidden="true">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
                   <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.5c.003-3.6 2.93-6.52 6.533-6.52a6.5 6.5 0 0 1 4.63 1.91 6.48 6.48 0 0 1 1.92 4.62c-.003 3.6-2.93 6.52-6.53 6.52zm3.76-4.13c-.205-.103-1.215-.6-1.404-.668-.19-.068-.327-.103-.465.103-.137.205-.535.668-.656.805-.12.137-.24.154-.445.051-.205-.103-.866-.319-1.65-1.016-.61-.544-1.022-1.215-1.142-1.42-.12-.205-.013-.316.09-.419.093-.092.205-.24.308-.36.103-.12.137-.205.205-.342.068-.137.034-.257-.017-.36-.051-.103-.465-1.12-.637-1.534-.167-.402-.337-.347-.465-.347h-.397c-.137 0-.36.051-.548.257-.188.205-.72.703-.72 1.713 0 1.01.737 1.985.84 2.122.103.137 1.45 2.214 3.513 3.105.491.212.874.339 1.172.434.492.156.94.134 1.295.082.395-.059 1.215-.496 1.387-.976.171-.48.171-.891.12-.976-.051-.086-.188-.137-.394-.24z"/>
                 </svg>
               </span>
-              <span class="label">WhatsApp</span>
+              WhatsApp
             </a>
 
-            <a class="btnPill" id="igFooter" href="https://instagram.com/USERNAME" target="_blank" rel="noopener" aria-label="Instagram trabajos">
+            <a class="btnPill" id="igFooter" href="https://instagram.com/USERNAME" target="_blank" rel="noopener">
               <span class="ico" aria-hidden="true">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
                   <path d="M8 5.78A2.22 2.22 0 1 0 8 10.22 2.22 2.22 0 0 0 8 5.78Zm0 3.65A1.43 1.43 0 1 1 8 6.57a1.43 1.43 0 0 1 0 2.86Z"/>
@@ -808,7 +778,7 @@
                   <path d="M12.2 2.9a.9.9 0 1 0 .9.9.9.9 0 0 0-.9-.9Z"/>
                 </svg>
               </span>
-              <span class="label">Instagram</span>
+              Instagram
             </a>
           </div>
 
@@ -834,19 +804,14 @@
       function setTheme(t){
         root.setAttribute("data-theme", t);
         try { localStorage.setItem("gaia_theme", t); } catch(e){}
-        if(metaTheme){
-          metaTheme.setAttribute("content", t === "light" ? "#ffffff" : "#0b0b0f");
-        }
+        if(metaTheme) metaTheme.setAttribute("content", t === "light" ? "#ffffff" : "#0b0b0f");
       }
 
       function initTheme(){
         var saved = null;
         try { saved = localStorage.getItem("gaia_theme"); } catch(e){}
-        if(saved === "light" || saved === "dark"){
-          setTheme(saved);
-        } else {
-          setTheme("dark");
-        }
+        if(saved === "light" || saved === "dark") setTheme(saved);
+        else setTheme("dark");
       }
 
       var toggle = document.getElementById("themeToggle");
@@ -857,20 +822,17 @@
         });
       }
 
-      // WhatsApp (placeholder) + mensaje por servicio
       var WA_BASE = "https://wa.me/XXXXXXXXXXX";
       function waLink(service){
         var msg = "Hola! Quiero turno para " + service + ". Me pasas disponibilidad? Gracias.";
         return WA_BASE + "?text=" + encodeURIComponent(msg);
       }
 
-      // Botones generales -> mensaje generico
       ["waTop","waHero","waFloat","waFooter"].forEach(function(id){
         var el = document.getElementById(id);
         if(el) el.href = waLink("un servicio");
       });
 
-      // Botones por servicio
       var serviceBtns = document.querySelectorAll(".waService");
       serviceBtns.forEach(function(a){
         var s = a.getAttribute("data-service") || "un servicio";
